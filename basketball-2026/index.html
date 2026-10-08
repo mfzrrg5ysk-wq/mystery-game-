@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0c1523">
+  <meta name="description" content="Court Kings '26 — original 1v1 arcade basketball with NBA stars, solo AI, local multiplayer and a tournament. Play offline.">
+  <title>Court Kings '26 • Arcade Basketball</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Court Kings home"><span class="brand-ball" aria-hidden="true">◉</span><span>COURT KINGS<span class="edition">’26</span></span></a>
+      <div class="header-right"><span class="offline-note">ARCADE BASKETBALL</span><button id="sound-btn" class="icon-btn" aria-label="Turn sound on" aria-pressed="false">SOUND OFF</button><button id="fullscreen-btn" class="icon-btn" aria-label="Enter fullscreen">FULLSCREEN</button></div>
+    </header>
+    <main>
+      <div class="section-line"><span class="eyebrow"><i></i> THE COURT</span><span id="round-label" class="secondary">2026 EDITION</span></div>
+      <div class="game-layout">
+        <section class="arena-shell" aria-label="Basketball game">
+          <div class="scoreboard">
+            <div class="score-team home"><span id="home-label">STEPHEN CURRY</span><div class="team-score"><strong id="score-home">00</strong><div class="heat-stack"><span>HEAT</span><div class="heat-track"><i id="heat-home"></i></div></div></div></div>
+            <div class="score-clock"><span id="clock-caption">TIP-OFF</span><strong id="clock">01:30</strong><span id="shot-clock">12 SECOND SHOT CLOCK</span></div>
+            <div class="score-team away"><span id="away-label">VICTOR WEMBANYAMA</span><div class="team-score"><strong id="score-away">00</strong><div class="heat-stack"><span>HEAT</span><div class="heat-track"><i id="heat-away"></i></div></div></div></div>
+          </div>
+          <div class="court-wrap" id="court-wrap">
+            <canvas id="court" tabindex="0" width="1200" height="650" aria-label="Basketball court. Move with A and D, jump W, hold X then release to shoot, S to pump fake or block, Z for super shot."></canvas>
+            <div id="menu-overlay" class="overlay menu-overlay">
+              <div class="menu-box"><span class="menu-kicker">THE 2026 LINEUP</span><h1>YOUR COURT.<br>YOUR <em>GAME.</em></h1><p>Pick your star. Time the release. Take the win.</p><button id="start-btn" class="primary-button">PLAY SOLO <span aria-hidden="true">▶</span></button><div class="menu-meta"><span>1 v 1</span><b>•</b><span id="menu-duration">90 SECONDS</span><b>•</b><span>OFFLINE READY</span></div></div>
+            </div>
+            <div id="pause-overlay" class="overlay dark-overlay" hidden><div class="dialog"><span class="eyebrow">TIMEOUT</span><h2>PAUSED</h2><button id="resume-btn" class="primary-button">BACK TO THE COURT</button><button id="pause-menu-btn" class="secondary-button">MATCH SETUP</button></div></div>
+            <div id="result-overlay" class="overlay dark-overlay" hidden><div class="dialog result-dialog"><span id="result-kicker" class="eyebrow">FINAL SCORE</span><h2 id="result-title">YOU WIN</h2><div id="result-score" class="result-score">12 <span>—</span> 8</div><div id="match-stats" class="match-stats"></div><p id="result-note"></p><button id="rematch-btn" class="primary-button">RUN IT BACK</button><button id="result-menu-btn" class="secondary-button">MATCH SETUP</button></div></div>
+          </div>
+          <div class="arena-bottom"><div class="possession"><span id="possession-label">READY WHEN YOU ARE</span><span id="stamina-label">DASH STAMINA 100%</span></div><button id="pause-btn" class="small-button" disabled>PAUSE <kbd>P</kbd></button></div>
+        </section>
+      <div class="touch-controls" id="touch-controls" aria-label="Touch game controls"><div class="touch-group"><button data-touch="left" aria-label="Move left">◀</button><button data-touch="right" aria-label="Move right">▶</button><button data-touch="jump">JUMP</button></div><div class="touch-group"><button data-touch="dash">DASH</button><button data-touch="defend">BLOCK</button><button data-touch="super" class="touch-super">SUPER</button><button data-touch="action" class="touch-shoot">SHOOT</button></div></div>
+        <aside class="setup" aria-label="Match settings">
+          <div class="panel-heading"><span class="eyebrow">MATCH SETUP</span><span class="panel-number">01</span></div>
+          <div class="mode-tabs" role="group" aria-label="Game mode"><button data-mode="solo" class="selected" aria-pressed="true">SOLO</button><button data-mode="versus" aria-pressed="false">2 PLAYER</button><button data-mode="tournament" aria-pressed="false">CUP</button><button data-mode="practice" aria-pressed="false">PRACTICE</button></div>
+          <div class="matchup">
+            <div class="matchup-player"><canvas id="portrait-home" width="150" height="160" aria-hidden="true"></canvas><label for="star-home">PLAYER 1</label><select id="star-home" aria-label="Choose Player 1"></select><span id="role-home">Deep-range shooter</span></div>
+            <span class="versus-mark">VS</span>
+            <div class="matchup-player"><canvas id="portrait-away" width="150" height="160" aria-hidden="true"></canvas><label id="opponent-caption" for="star-away">CPU</label><select id="star-away" aria-label="Choose opponent"></select><span id="role-away">Rim protector</span></div>
+          </div>
+          <div class="setup-row"><label for="difficulty">DIFFICULTY</label><select id="difficulty"><option value="easy">Rookie</option><option value="normal" selected>All-Star</option><option value="hard">Hall of Fame</option></select></div>
+          <div class="setup-row"><label for="duration">GAME LENGTH</label><select id="duration"><option value="60">60 seconds</option><option value="90" selected>90 seconds</option><option value="120">120 seconds</option></select></div>
+          <div class="setup-row"><label for="court-style">COURT</label><select id="court-style"><option value="arena">Night Arena</option><option value="street">Rooftop Court</option></select></div>
+          <div id="player-ratings" class="ratings"></div>
+          <p class="rating-note">Custom arcade ratings. Original graphics.<br>Independent fan game.</p>
+          <div id="cup-panel" class="cup-panel" hidden></div>
+        </aside>
+      </div>
+      <section class="control-strip" aria-label="How to play"><div><span class="control-heading">MOVE</span><span><kbd>A</kbd><kbd>D</kbd><span class="or">or</span><kbd>←</kbd><kbd>→</kbd></span></div><div><span class="control-heading">JUMP</span><span><kbd>W</kbd><span class="or">or</span><kbd>↑</kbd></span></div><div><span class="control-heading">SHOOT / STEAL</span><span><kbd>X</kbd><span class="control-help">Hold. Release on green.</span></span></div><div><span class="control-heading">FAKE / BLOCK</span><kbd>S</kbd></div><div><span class="control-heading">DASH</span><span><kbd>SHIFT</kbd><span class="control-help">or double-tap move</span></span></div><div><span class="control-heading">SUPER SHOT</span><span><kbd>Z</kbd><span class="control-help">when heat is full</span></span></div></section>
+      <div id="two-player-help" class="two-player-help" hidden><span><b>PLAYER 1</b> A / D move · W jump · B shoot / steal · S fake / block · V super · left Shift dash</span><span><b>PLAYER 2</b> ← / → move · ↑ jump · L shoot / steal · ↓ fake / block · K super · right Shift dash</span></div>
+      <section class="roster-section" aria-label="2026 player roster"><div class="section-line"><span class="eyebrow">PICK YOUR STAR</span><span class="secondary">12 PLAYERS · DIFFERENT STRENGTHS</span></div><div id="roster" class="roster"></div></section>
+      <footer><span>COURT KINGS ’26</span><span>2 points inside · 3 from deep · next basket wins in overtime</span><span id="record">LOCAL RECORD 0 W / 0 L</span></footer>
+      <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+    </main>
+  </div>
+  <script src="src/engine.js"></script>
+  <script src="src/render.js"></script>
+  <script src="src/app.js"></script>
+</body>
+</html>
