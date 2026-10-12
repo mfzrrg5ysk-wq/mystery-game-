@@ -6,4 +6,6 @@ if [ "$(uname -m)" != "x86_64" ]; then
     echo "For ARM Linux, follow the source instructions in README.md."
     exit 1
 fi
+# Chromebook Files and some ZIP extractors do not preserve executable bits.
+chmod u+x "$task_game_dir/TungTungLegendsX/TungTungLegendsX"
 exec "$task_game_dir/TungTungLegendsX/TungTungLegendsX" "$@"
