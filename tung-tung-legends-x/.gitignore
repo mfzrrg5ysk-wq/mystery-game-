@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.venv/
+build/
+dist/
+release/
+release-staging/
+*.spec
+build-log.txt
+*.egg-info/
